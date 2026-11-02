@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090707" />
+  <title>aku masih kangen kamu</title>
+  <style>
+    :root {
+      --bg: #090707;
+      --panel: rgba(25, 12, 14, .88);
+      --red: #d52a42;
+      --red-soft: #8d1c2c;
+      --text: #f5e9e9;
+      --muted: #b9a6a9;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(130, 18, 37, .28), transparent 55%),
+        linear-gradient(160deg, #10090b, var(--bg) 60%);
+      font-family: Georgia, "Times New Roman", serif;
+      overflow-x: hidden;
+    }
+    .rain, .rain::before, .rain::after {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    }
+    .rain {
+      opacity: .25;
+      background-image: repeating-linear-gradient(105deg, transparent 0 24px, rgba(210, 205, 210, .2) 25px, transparent 26px 54px);
+      background-size: 100% 160px;
+      animation: rain 1.3s linear infinite;
+    }
+    .rain::before {
+      content: ""; opacity: .5;
+      background-image: repeating-linear-gradient(105deg, transparent 0 40px, rgba(213, 42, 66, .22) 41px, transparent 42px 80px);
+      animation: rain 2s linear infinite;
+    }
+    @keyframes rain { from { transform: translateY(-160px); } to { transform: translateY(160px); } }
+    .wrap {
+      position: relative; z-index: 1;
+      width: min(760px, 100%); margin: auto; padding: 28px 18px 48px;
+    }
+    .topline {
+      display: flex; justify-content: space-between; align-items: center;
+      color: #c47a84; font: 10px/1.4 Arial, sans-serif;
+      letter-spacing: .22em; text-transform: uppercase;
+    }
+    .dot { color: var(--red); }
+    header { text-align: center; padding: 72px 8px 36px; }
+    .eyebrow {
+      color: #d45c6d; font: 11px Arial, sans-serif; letter-spacing: .35em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    h1 {
+      font-size: clamp(38px, 9vw, 70px); line-height: 1.03; font-weight: 400;
+      letter-spacing: -.04em; margin: 0; text-shadow: 0 0 35px rgba(213,42,66,.24);
+    }
+    h1 em { color: var(--red); font-weight: 400; }
+    .subtitle { color: var(--muted); font-size: 14px; font-style: italic; margin-top: 20px; }
+    .heart { color: var(--red); font-size: 22px; margin-top: 26px; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 50% { transform: scale(1.16); opacity: .65; } }
+    .music {
+      display: flex; align-items: center; gap: 14px; padding: 15px 17px;
+      background: rgba(32, 12, 16, .75); border: 1px solid rgba(213,42,66,.32);
+      border-radius: 13px; margin: 0 auto 22px; max-width: 440px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.2);
+    }
+    .album {
+      width: 46px; height: 46px; flex: 0 0 46px; border-radius: 8px;
+      display: grid; place-items: center; background: linear-gradient(135deg,#6e1424,#160b0d);
+      color: #f4c6ce; font-size: 22px;
+    }
+    .track { flex: 1; min-width: 0; }
+    .track strong { display: block; font: 14px Arial, sans-serif; letter-spacing: .03em; }
+    .track small { display: block; margin-top: 5px; color: var(--muted); font: 11px Arial, sans-serif; }
+    .equalizer { display: flex; align-items: center; gap: 3px; height: 22px; }
+    .equalizer i { width: 3px; border-radius: 5px; background: var(--red); animation: bars .7s ease-in-out infinite alternate; }
+    .equalizer i:nth-child(1) { height: 8px; }
+    .equalizer i:nth-child(2) { height: 17px; animation-delay: .2s; }
+    .equalizer i:nth-child(3) { height: 12px; animation-delay: .4s; }
+    .equalizer i:nth-child(4) { height: 20px; animation-delay: .1s; }
+    @keyframes bars { to { transform: scaleY(.35); opacity: .55; } }
+    .letter {
+      position: relative; padding: clamp(23px, 6vw, 42px);
+      background: linear-gradient(145deg, rgba(31,16,19,.94), rgba(15,10,11,.96));
+      border: 1px solid rgba(166, 45, 62, .28); border-radius: 16px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.3);
+    }
+    .letter::before {
+      content: "“"; position: absolute; top: 7px; left: 18px;
+      color: rgba(213,42,66,.3); font-size: 65px; line-height: 1;
+    }
+    .letter p { color: #e8d9dc; font-size: 16px; line-height: 1.95; margin: 0 0 18px; }
+    .letter p:last-child { margin-bottom: 0; }
+    .letter .english { color: #d9a3ac; font-style: italic; }
+    .divider { display: flex; align-items: center; gap: 13px; margin: 30px 0; color: #a55b66; font-size: 12px; letter-spacing: .18em; }
+    .divider::before, .divider::after { content: ""; height: 1px; flex: 1; background: linear-gradient(90deg, transparent, #63202b); }
+    .divider::after { transform: rotate(180deg); }
+    .ending { text-align: center; padding: 8px 12px 30px; }
+    .ending p { color: var(--muted); font-size: 14px; line-height: 1.8; font-style: italic; }
+    .ending strong { display: block; margin-top: 18px; color: #e5a0ab; font-size: 17px; font-weight: 400; }
+    .btn {
+      margin-top: 16px; border: 1px solid #742433; color: #f2cbd1; background: #1a0b0e;
+      padding: 12px 20px; border-radius: 30px; font: 12px Arial, sans-serif;
+      letter-spacing: .08em; cursor: pointer; transition: .2s;
+    }
+    .btn:hover, .btn:focus-visible { background: #45111b; outline: none; box-shadow: 0 0 22px #58152266; }
+    #secret { display: none; color: #e4b1ba; margin: 20px auto 0; max-width: 420px; line-height: 1.8; font-style: italic; }
+    footer { text-align: center; color: #6e5559; font: 10px Arial, sans-serif; letter-spacing: .16em; margin-top: 16px; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="rain" aria-hidden="true"></div>
+  <main class="wrap">
+    <div class="topline"><span>midnight thoughts</span><span><span class="dot">●</span> 02:17 AM</span></div>
+    <header>
+      <div class="eyebrow">a letter i'll never send</div>
+      <h1>aku masih<br><em>kangen kamu.</em></h1>
+      <div class="subtitle">some memories never really leave.</div>
+      <div class="heart" aria-hidden="true">♥</div>
+    </header>
+
+    <section class="music" aria-label="Dekorasi musik">
+      <div class="album">♫</div>
+      <div class="track"><strong>Haunting</strong><small>for the memories that stay</small></div>
+      <div class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    </section>
+
+    <article class="letter">
+      <p>gatau kenapa yaa, kadang aku masih suka kangen kamu tiba-tiba. kangen cara kita ngobrol, bercanda, cerita hal random, semuanya deh.</p>
+      <p>padahal sekarang kita udah ga kayak dulu lagi, bahkan buat sekadar nanya kabar aja rasanya asing banget. lucu yaa, dulu kamu jadi tempat aku cerita apa aja, sekarang malah jadi orang yang cuma bisa aku kangenin diam-diam.</p>
+      <p class="english">sometimes i still want to text you and tell you about my day, but then i remember that we're not together anymore.</p>
+      <p>kadang ada hal kecil yang bikin aku inget kamu. terus aku pengen cerita, sebelum akhirnya sadar kalau sekarang aku udah ga punya alasan buat nge-chat kamu lagi. soalnya kita udah bukan “kita” yang dulu.</p>
+      <p>aku gatau kamu masih pernah inget aku atau engga. mungkin kamu udah bahagia sama kehidupan kamu yang sekarang, sedangkan aku masih sesekali keinget hal-hal kecil tentang kita.</p>
+      <p>i don't regret meeting you, not even once. makasih yaa udah pernah jadi bagian dari hari-hari aku, udah pernah bikin aku sebahagia itu. kenangan kita mungkin udah lewat, tapi bukan berarti semuanya ga pernah berarti.</p>
+      <p>jujur, kalau ditanya masih sayang atau engga, mungkin jawabannya masih ada. cuma sekarang aku udah belajar kalau ga semua rasa harus punya akhir yang sama seperti yang kita mau.</p>
+      <p class="english">i miss you, but i know missing you doesn't mean i have to come back.</p>
+      <p>aku kangen, tapi aku juga sadar kita udah punya jalan masing-masing. jadi kalau suatu hari kamu tiba-tiba inget aku, semoga yang kamu inget cuma hal-hal baik, yaa.</p>
+      <p>semoga kamu bahagia terus. beneran. walaupun sekarang aku udah bukan bagian dari bahagia kamu. 🤍</p>
+    </article>
+
+    <div class="divider">things left unsaid</div>
+    <section class="ending">
+      <p>“mungkin kita cuma ditakdirkan buat saling kenal,<br>bukan buat saling menetap.”</p>
+      <button class="btn" id="secretBtn" type="button" aria-expanded="false">buka pesan kecil ♡</button>
+      <p id="secret">kalau kangen ini datang lagi, semoga aku bisa mengingatmu tanpa harus kembali. thank you for being a beautiful part of my story.</p>
+      <strong>take care, wherever you are.</strong>
+    </section>
+    <footer>MADE OF MEMORIES · NOT MEANT TO BE SENT</footer>
+  </main>
+  <script>
+    const button = document.getElementById('secretBtn');
+    const secret = document.getElementById('secret');
+    button.addEventListener('click', () => {
+      const isOpen = secret.style.display === 'block';
+      secret.style.display = isOpen ? 'none' : 'block';
+      button.textContent = isOpen ? 'buka pesan kecil ♡' : 'tutup pesan ♡';
+      button.setAttribute('aria-expanded', String(!isOpen));
+    });
+  </script>
+</body>
+</html>
